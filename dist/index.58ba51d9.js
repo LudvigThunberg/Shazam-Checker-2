@@ -463,6 +463,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 window.onload = function() {
     document.getElementById("search-button").addEventListener("click", searchShazamArtist);
+    document.getElementById("modal-close").addEventListener("click", closeModal);
 };
 let defaultImage = "../../assets/gag2.jpg";
 function searchShazamArtist() {
@@ -551,19 +552,30 @@ function checkShazams(songId) {
     }).then((response)=>{
         return response.json();
     }).then((result)=>{
-        createShazamsHtml(result);
+        createShazamsModalHtml(result);
     }).catch((err)=>{
         console.error(err);
     });
 }
-function createShazamsHtml(result) {
+function createShazamsModalHtml(result) {
     console.log(result.total);
+    let modal = document.getElementById("modal");
     let container = document.createElement("div");
     let shazamsParagrah = document.createElement("p");
-    shazamsParagrah.className = "shazams-paragraph";
+    shazamsParagrah.id = "shazams-paragraph";
     shazamsParagrah.innerHTML = result.total;
     container.appendChild(shazamsParagrah);
-    document.body.appendChild(container);
+    modal.appendChild(container);
+    openModal();
+}
+function openModal() {
+    let modalBackground = document.getElementById("modal-background");
+    modalBackground.classList.add("modal-background-class-visible");
+}
+function closeModal() {
+    let modalBackground = document.getElementById("modal-background");
+    document.getElementById("shazams-paragraph").innerHTML = "";
+    modalBackground.classList.remove("modal-background-class-visible");
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"ciiiV":[function(require,module,exports) {

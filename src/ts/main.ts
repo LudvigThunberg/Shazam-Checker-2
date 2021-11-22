@@ -5,6 +5,7 @@ window.onload = function () {
   document
     .getElementById("search-button")
     .addEventListener("click", searchShazamArtist);
+  document.getElementById("modal-close").addEventListener("click", closeModal);
 };
 
 let defaultImage: string = "../../assets/gag2.jpg";
@@ -136,22 +137,44 @@ function checkShazams(songId: string) {
       return response.json();
     })
     .then((result) => {
-      createShazamsHtml(result);
+      createShazamsModalHtml(result);
     })
     .catch((err) => {
       console.error(err);
     });
 }
 
-function createShazamsHtml(result) {
+function createShazamsModalHtml(result) {
   console.log(result.total);
+
+  let modal: HTMLDivElement = document.getElementById(
+    "modal"
+  ) as HTMLDivElement;
   let container: HTMLDivElement = document.createElement("div");
   let shazamsParagrah: HTMLParagraphElement = document.createElement("p");
 
-  shazamsParagrah.className = "shazams-paragraph";
+  shazamsParagrah.id = "shazams-paragraph";
 
   shazamsParagrah.innerHTML = result.total;
 
   container.appendChild(shazamsParagrah);
-  document.body.appendChild(container);
+  modal.appendChild(container);
+  openModal();
+}
+
+function openModal() {
+  let modalBackground: HTMLDivElement = document.getElementById(
+    "modal-background"
+  ) as HTMLDivElement;
+
+  modalBackground.classList.add("modal-background-class-visible");
+}
+
+function closeModal() {
+  let modalBackground: HTMLDivElement = document.getElementById(
+    "modal-background"
+  ) as HTMLDivElement;
+  document.getElementById("shazams-paragraph").innerHTML = "";
+
+  modalBackground.classList.remove("modal-background-class-visible");
 }
