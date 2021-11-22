@@ -459,6 +459,143 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"7BLcd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+window.onload = function() {
+    document.getElementById("search-button").addEventListener("click", searchShazamArtist);
+};
+let defaultImage = "../../assets/gag2.jpg";
+function searchShazamArtist() {
+    let seachInput = document.getElementById("search-input");
+    let serachInputValue = seachInput.value;
+    fetch("https://shazam-core.p.rapidapi.com/v1/artists/search?query=" + serachInputValue, {
+        method: "GET",
+        headers: {
+            "x-rapidapi-host": "shazam-core.p.rapidapi.com",
+            "x-rapidapi-key": "9f1699e663mshd0bfd2ee994f84cp10d6f4jsnd852b4371c6e"
+        }
+    }).then((response)=>{
+        return response.json();
+    }).then((result)=>{
+        createArtistHtml(result);
+    }).catch((err)=>{
+        console.error(err);
+    });
+}
+function createArtistHtml(result) {
+    let mainContainer = document.getElementById("main-container");
+    let container = document.createElement("div");
+    container.id = "container";
+    for(let i = 0; i < result.length; i++){
+        let artistContainer = document.createElement("div");
+        artistContainer.addEventListener("click", ()=>{
+            searchTracks(result[i].id);
+        });
+        let artistNameParagraph = document.createElement("p");
+        let imageContainer = document.createElement("div");
+        let artistImage = document.createElement("img");
+        imageContainer.className = "image-container";
+        artistContainer.id = "artist-container";
+        artistNameParagraph.innerHTML = result[i].name;
+        //artistImage.src = result[i].avatar?.default:defaulImage;
+        if (result[i].avatar) artistImage.src = result[i].avatar.default;
+        else artistImage.src = defaultImage;
+        container.appendChild(artistContainer);
+        artistContainer.appendChild(artistNameParagraph);
+        artistContainer.appendChild(imageContainer);
+        imageContainer.appendChild(artistImage);
+    }
+    mainContainer.appendChild(container);
+}
+function searchTracks(artistId) {
+    fetch("https://shazam-core.p.rapidapi.com/v1/artists/tracks?artist_id=" + artistId + "&limit=10", {
+        method: "GET",
+        headers: {
+            "x-rapidapi-host": "shazam-core.p.rapidapi.com",
+            "x-rapidapi-key": "9f1699e663mshd0bfd2ee994f84cp10d6f4jsnd852b4371c6e"
+        }
+    }).then((response)=>{
+        return response.json();
+    }).then((result)=>{
+        createSongHtml(result);
+    }).catch((err)=>{
+        console.error(err);
+    });
+}
+function createSongHtml(result) {
+    let containerTwo = document.createElement("div");
+    for(let i = 0; i < result.length; i++){
+        let songContainer = document.createElement("div");
+        songContainer.addEventListener("click", ()=>{
+            checkShazams(result[i].id);
+        });
+        let songTitle = document.createElement("p");
+        let songImgContainer = document.createElement("div");
+        let coverArt = document.createElement("img");
+        songImgContainer.className = "song-image-container";
+        songTitle.innerHTML = result[i].title;
+        coverArt.src = result[i].images?.coverart;
+        songContainer.appendChild(songTitle);
+        songImgContainer.appendChild(coverArt);
+        songContainer.appendChild(songImgContainer);
+        containerTwo.appendChild(songContainer);
+    }
+    document.body.appendChild(containerTwo);
+}
+function checkShazams(songId) {
+    fetch("https://shazam-core.p.rapidapi.com/v1/tracks/total-shazams?track_id=" + songId + "", {
+        method: "GET",
+        headers: {
+            "x-rapidapi-host": "shazam-core.p.rapidapi.com",
+            "x-rapidapi-key": "9f1699e663mshd0bfd2ee994f84cp10d6f4jsnd852b4371c6e"
+        }
+    }).then((response)=>{
+        return response.json();
+    }).then((result)=>{
+        createShazamsHtml(result);
+    }).catch((err)=>{
+        console.error(err);
+    });
+}
+function createShazamsHtml(result) {
+    console.log(result.total);
+    let container = document.createElement("div");
+    let shazamsParagrah = document.createElement("p");
+    shazamsParagrah.className = "shazams-paragraph";
+    shazamsParagrah.innerHTML = result.total;
+    container.appendChild(shazamsParagrah);
+    document.body.appendChild(container);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"ciiiV":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
 
 },{}]},["e4k7L","7BLcd"], "7BLcd", "parcelRequireeed5")
 
