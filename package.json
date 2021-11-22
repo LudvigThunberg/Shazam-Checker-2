@@ -1,0 +1,11 @@
+{
+  "name": "shazam-checker-2",
+  "version": "1.0.0",
+  "description": "A small web app that lets you check the amounts of shazams a song has",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ludvig Thunberg",
+  "license": "ISC"
+}
