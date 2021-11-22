@@ -37,9 +37,6 @@ function searchShazamArtist() {
 }
 
 function createArtistHtml(result: IArtist[]) {
-  let mainContainer: HTMLDivElement = document.getElementById(
-    "main-container"
-  ) as HTMLDivElement;
   let container: HTMLDivElement = document.createElement("div");
 
   container.id = "container";
@@ -71,7 +68,7 @@ function createArtistHtml(result: IArtist[]) {
     artistContainer.appendChild(imageContainer);
     imageContainer.appendChild(artistImage);
   }
-  mainContainer.appendChild(container);
+  document.body.appendChild(container);
 }
 function searchTracks(artistId: string) {
   fetch(
