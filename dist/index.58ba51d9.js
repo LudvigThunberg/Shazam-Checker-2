@@ -464,8 +464,9 @@ parcelHelpers.defineInteropFlag(exports);
 window.onload = function() {
     document.getElementById("search-button").addEventListener("click", searchShazamArtist);
     document.getElementById("modal-close").addEventListener("click", closeModal);
+    document.getElementById("modal-background").addEventListener("click", closeModal);
 };
-let defaultArtistImage = /* "../../assets/r.jpg" */ "https://img.discogs.com/AUHU02l-_SVtXwKaa-85DgGEIvI=/fit-in/300x300/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/R-2574977-1420859083-1672.jpeg.jpg";
+let defaultArtistImage = /* "../assets/r.jpg"; */ "https://openclipart.org/image/800px/7645";
 let defaultCoverImage = "https://media.istockphoto.com/vectors/vinyl-records-vector-id542290570?k=20&m=542290570&s=612x612&w=0&h=nKQYVVUXByWoMZ6YXH-thC8HzPTDiwfw-MODsmi6cTc=";
 function searchShazamArtist() {
     let seachInput = document.getElementById("search-input");
@@ -486,17 +487,21 @@ function searchShazamArtist() {
 }
 function createArtistHtml(result) {
     let container = document.createElement("div");
+    let mainContainer = document.createElement("div");
     container.id = "container";
+    mainContainer.id = "mainContainer";
+    container.innerHTML = "";
+    mainContainer.innerHTML = "";
     for(let i = 0; i < result.length; i++){
         let artistContainer = document.createElement("div");
-        artistContainer.addEventListener("click", ()=>{
-            searchTracks(result[i].id);
-        });
-        let artistNameParagraph = document.createElement("p");
+        let artistNameParagraph = document.createElement("h2");
         let imageContainer = document.createElement("div");
         let artistImage = document.createElement("img");
         imageContainer.className = "image-container";
         artistContainer.id = "artist-container";
+        artistContainer.addEventListener("click", ()=>{
+            searchTracks(result[i].id);
+        });
         artistNameParagraph.innerHTML = result[i].name;
         //artistImage.src = result[i].avatar?.default:defaulImage;
         if (result[i].avatar) artistImage.src = result[i].avatar.default;
@@ -506,7 +511,9 @@ function createArtistHtml(result) {
         artistContainer.appendChild(imageContainer);
         imageContainer.appendChild(artistImage);
     }
-    document.body.appendChild(container);
+    mainContainer.appendChild(container);
+    document.body.appendChild(mainContainer);
+    console.log(defaultArtistImage);
 }
 function searchTracks(artistId) {
     fetch("https://shazam-core.p.rapidapi.com/v1/artists/tracks?artist_id=" + artistId + "&limit=10", {
@@ -525,15 +532,18 @@ function searchTracks(artistId) {
 }
 function createSongHtml(result) {
     let containerTwo = document.createElement("div");
+    let mainContainer = document.getElementById("mainContainer");
+    containerTwo.id = "container-two";
     for(let i = 0; i < result.length; i++){
         let songContainer = document.createElement("div");
-        songContainer.addEventListener("click", ()=>{
-            checkShazams(result[i].id);
-        });
         let songTitle = document.createElement("p");
         let songImgContainer = document.createElement("div");
         let coverArt = document.createElement("img");
         songImgContainer.className = "song-image-container";
+        songContainer.className = "song-container";
+        songContainer.addEventListener("click", ()=>{
+            checkShazams(result[i].id);
+        });
         songTitle.innerHTML = result[i].title;
         //coverArt.src = result[i].images?.coverart;
         if (result[i].images) coverArt.src = result[i].images.coverart;
@@ -543,7 +553,8 @@ function createSongHtml(result) {
         songContainer.appendChild(songImgContainer);
         containerTwo.appendChild(songContainer);
     }
-    document.body.appendChild(containerTwo);
+    mainContainer.appendChild(containerTwo);
+//document.body.appendChild(containerTwo);
 }
 function checkShazams(songId) {
     fetch("https://shazam-core.p.rapidapi.com/v1/tracks/total-shazams?track_id=" + songId + "", {
@@ -561,12 +572,11 @@ function checkShazams(songId) {
     });
 }
 function createShazamsModalHtml(result) {
-    console.log(result.total);
     let modal = document.getElementById("modal");
     let container = document.createElement("div");
     let shazamsParagrah = document.createElement("p");
-    shazamsParagrah.id = "shazams-paragraph";
-    shazamsParagrah.innerHTML = result.total;
+    shazamsParagrah.className = "shazams-paragraph";
+    shazamsParagrah.innerHTML = "Total Shazams: " + result.total;
     container.appendChild(shazamsParagrah);
     modal.appendChild(container);
     openModal();
@@ -577,8 +587,10 @@ function openModal() {
 }
 function closeModal() {
     let modalBackground = document.getElementById("modal-background");
-    document.getElementById("shazams-paragraph").innerHTML = "";
+    let modal = document.getElementById("modal");
     modalBackground.classList.remove("modal-background-class-visible");
+    modal.innerHTML = "";
+    console.log(modal.innerHTML);
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"ciiiV":[function(require,module,exports) {

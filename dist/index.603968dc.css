@@ -30,6 +30,55 @@ body header .input-container #search-input {
   border-radius: 5px;
   box-sizing: border-box;
 }
+body #mainContainer {
+  display: flex;
+}
+body #mainContainer #container {
+  width: 49vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  overflow: scroll;
+  background-color: whitesmoke;
+}
+body #mainContainer #container #artist-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body #mainContainer #container #artist-container .image-container {
+  width: 100%;
+}
+body #mainContainer #container #artist-container .image-container img {
+  width: 100%;
+}
+body #mainContainer #container-two {
+  width: 49vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  overflow: scroll;
+  background-color: whitesmoke;
+}
+body #mainContainer #container-two .song-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body #mainContainer #container-two .song-container .song-image-container {
+  width: 100%;
+}
+body #mainContainer #container-two .song-container .song-image-container img {
+  width: 100%;
+}
 body .modal-background-class {
   position: fixed;
   top: 0;
@@ -47,6 +96,7 @@ body .modal-background-class {
 body .modal-background-class .modal-class {
   background-color: burlywood;
   width: 30%;
+  height: 20%;
   border-radius: 5px;
   display: flex;
   flex-direction: column;

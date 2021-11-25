@@ -29,6 +29,56 @@ body {
       }
     }
   }
+  #mainContainer {
+    display: flex;
+    #container {
+      width: 49vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      overflow: scroll;
+      background-color: whitesmoke;
+      #artist-container {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .image-container {
+          width: 100%;
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+    #container-two {
+      width: 49vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      overflow: scroll;
+      background-color: whitesmoke;
+      .song-container {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .song-image-container {
+          width: 100%;
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
   .modal-background-class {
     position: fixed;
     top: 0;
@@ -46,6 +96,7 @@ body {
     .modal-class {
       background-color: burlywood;
       width: 30%;
+      height: 20%;
       border-radius: 5px;
       display: flex;
       flex-direction: column;
