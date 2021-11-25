@@ -466,11 +466,13 @@ window.onload = function() {
     document.getElementById("modal-close").addEventListener("click", closeModal);
     document.getElementById("modal-background").addEventListener("click", closeModal);
 };
-let defaultArtistImage = /* "../assets/r.jpg"; */ "https://openclipart.org/image/800px/7645";
+let defaultArtistImage = "https://openclipart.org/image/800px/7645";
 let defaultCoverImage = "https://media.istockphoto.com/vectors/vinyl-records-vector-id542290570?k=20&m=542290570&s=612x612&w=0&h=nKQYVVUXByWoMZ6YXH-thC8HzPTDiwfw-MODsmi6cTc=";
 function searchShazamArtist() {
+    let container = document.getElementById("container");
     let seachInput = document.getElementById("search-input");
     let serachInputValue = seachInput.value;
+    container.innerHTML = "";
     fetch("https://shazam-core.p.rapidapi.com/v1/artists/search?query=" + serachInputValue, {
         method: "GET",
         headers: {
@@ -486,12 +488,8 @@ function searchShazamArtist() {
     });
 }
 function createArtistHtml(result) {
-    let container = document.createElement("div");
-    let mainContainer = document.createElement("div");
-    container.id = "container";
-    mainContainer.id = "mainContainer";
-    container.innerHTML = "";
-    mainContainer.innerHTML = "";
+    let container = document.getElementById("container");
+    let mainContainer = document.getElementById("mainContainer");
     for(let i = 0; i < result.length; i++){
         let artistContainer = document.createElement("div");
         let artistNameParagraph = document.createElement("h2");
@@ -512,10 +510,10 @@ function createArtistHtml(result) {
         imageContainer.appendChild(artistImage);
     }
     mainContainer.appendChild(container);
-    document.body.appendChild(mainContainer);
-    console.log(defaultArtistImage);
 }
 function searchTracks(artistId) {
+    let containerTwo = document.getElementById("container-two");
+    containerTwo.innerHTML = "";
     fetch("https://shazam-core.p.rapidapi.com/v1/artists/tracks?artist_id=" + artistId + "&limit=10", {
         method: "GET",
         headers: {
@@ -531,9 +529,8 @@ function searchTracks(artistId) {
     });
 }
 function createSongHtml(result) {
-    let containerTwo = document.createElement("div");
+    let containerTwo = document.getElementById("container-two");
     let mainContainer = document.getElementById("mainContainer");
-    containerTwo.id = "container-two";
     for(let i = 0; i < result.length; i++){
         let songContainer = document.createElement("div");
         let songTitle = document.createElement("p");

@@ -30,10 +30,17 @@ body header .input-container #search-input {
   border-radius: 5px;
   box-sizing: border-box;
 }
+body #heading-container {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20%;
+}
 body #mainContainer {
   display: flex;
+  justify-content: flex-start;
 }
 body #mainContainer #container {
+  order: 1;
   width: 49vw;
   height: 100vh;
   display: flex;
@@ -57,6 +64,7 @@ body #mainContainer #container #artist-container .image-container img {
   width: 100%;
 }
 body #mainContainer #container-two {
+  order: 2;
   width: 49vw;
   height: 100vh;
   display: flex;
@@ -94,7 +102,7 @@ body .modal-background-class {
   transition: visibility 0s, opacity 0.2s;
 }
 body .modal-background-class .modal-class {
-  background-color: burlywood;
+  background-color: whitesmoke;
   width: 30%;
   height: 20%;
   border-radius: 5px;

@@ -11,17 +11,21 @@ window.onload = function () {
     .addEventListener("click", closeModal);
 };
 
-let defaultArtistImage: string =
-  /* "../assets/r.jpg"; */
-  "https://openclipart.org/image/800px/7645";
+let defaultArtistImage: string = "https://openclipart.org/image/800px/7645";
 let defaultCoverImage: string =
   "https://media.istockphoto.com/vectors/vinyl-records-vector-id542290570?k=20&m=542290570&s=612x612&w=0&h=nKQYVVUXByWoMZ6YXH-thC8HzPTDiwfw-MODsmi6cTc=";
 
 function searchShazamArtist() {
+  let container: HTMLDivElement = document.getElementById(
+    "container"
+  ) as HTMLDivElement;
   let seachInput: HTMLInputElement = document.getElementById(
     "search-input"
   ) as HTMLInputElement;
   let serachInputValue: string = seachInput.value;
+
+  container.innerHTML = "";
+
   fetch(
     "https://shazam-core.p.rapidapi.com/v1/artists/search?query=" +
       serachInputValue,
@@ -45,16 +49,12 @@ function searchShazamArtist() {
 }
 
 function createArtistHtml(result: IArtist[]) {
-  let container: HTMLDivElement = document.createElement("div");
-  let mainContainer: HTMLDivElement = document.createElement(
-    "div"
+  let container: HTMLDivElement = document.getElementById(
+    "container"
   ) as HTMLDivElement;
-
-  container.id = "container";
-  mainContainer.id = "mainContainer";
-
-  container.innerHTML = "";
-  mainContainer.innerHTML = "";
+  let mainContainer: HTMLDivElement = document.getElementById(
+    "mainContainer"
+  ) as HTMLDivElement;
 
   for (let i = 0; i < result.length; i++) {
     let artistContainer: HTMLDivElement = document.createElement("div");
@@ -65,7 +65,6 @@ function createArtistHtml(result: IArtist[]) {
     let artistImage: HTMLImageElement = document.createElement("img");
 
     imageContainer.className = "image-container";
-
     artistContainer.id = "artist-container";
 
     artistContainer.addEventListener("click", () => {
@@ -87,11 +86,15 @@ function createArtistHtml(result: IArtist[]) {
     imageContainer.appendChild(artistImage);
   }
   mainContainer.appendChild(container);
-  document.body.appendChild(mainContainer);
-  console.log(defaultArtistImage);
 }
 
 function searchTracks(artistId: string) {
+  let containerTwo: HTMLDivElement = document.getElementById(
+    "container-two"
+  ) as HTMLDivElement;
+
+  containerTwo.innerHTML = "";
+
   fetch(
     "https://shazam-core.p.rapidapi.com/v1/artists/tracks?artist_id=" +
       artistId +
@@ -116,12 +119,12 @@ function searchTracks(artistId: string) {
 }
 
 function createSongHtml(result: ISong[]) {
-  let containerTwo: HTMLDivElement = document.createElement("div");
+  let containerTwo: HTMLDivElement = document.getElementById(
+    "container-two"
+  ) as HTMLDivElement;
   let mainContainer: HTMLDivElement = document.getElementById(
     "mainContainer"
   ) as HTMLDivElement;
-
-  containerTwo.id = "container-two";
 
   for (let i = 0; i < result.length; i++) {
     let songContainer: HTMLDivElement = document.createElement("div");
