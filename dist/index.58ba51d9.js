@@ -551,7 +551,6 @@ function createSongHtml(result) {
         containerTwo.appendChild(songContainer);
     }
     mainContainer.appendChild(containerTwo);
-//document.body.appendChild(containerTwo);
 }
 function checkShazams(songId) {
     fetch("https://shazam-core.p.rapidapi.com/v1/tracks/total-shazams?track_id=" + songId + "", {
@@ -570,6 +569,7 @@ function checkShazams(songId) {
 }
 function createShazamsModalHtml(result) {
     let modal = document.getElementById("modal");
+    modal.innerHTML = "";
     let container = document.createElement("div");
     let shazamsParagrah = document.createElement("p");
     shazamsParagrah.className = "shazams-paragraph";
@@ -586,7 +586,6 @@ function closeModal() {
     let modalBackground = document.getElementById("modal-background");
     let modal = document.getElementById("modal");
     modalBackground.classList.remove("modal-background-class-visible");
-    modal.innerHTML = "";
     console.log(modal.innerHTML);
 }
 

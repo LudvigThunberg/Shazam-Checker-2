@@ -154,7 +154,6 @@ function createSongHtml(result: ISong[]) {
     containerTwo.appendChild(songContainer);
   }
   mainContainer.appendChild(containerTwo);
-  //document.body.appendChild(containerTwo);
 }
 
 function checkShazams(songId: string) {
@@ -185,6 +184,7 @@ function createShazamsModalHtml(result) {
   let modal: HTMLDivElement = document.getElementById(
     "modal"
   ) as HTMLDivElement;
+  modal.innerHTML = "";
   let container: HTMLDivElement = document.createElement("div");
   let shazamsParagrah: HTMLParagraphElement = document.createElement("p");
 
@@ -212,6 +212,5 @@ function closeModal() {
     "modal"
   ) as HTMLDivElement;
   modalBackground.classList.remove("modal-background-class-visible");
-  modal.innerHTML = "";
   console.log(modal.innerHTML);
 }
