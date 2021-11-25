@@ -54,7 +54,6 @@ body #mainContainer #container #artist-container {
   width: 80%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 body #mainContainer #container #artist-container .image-container {

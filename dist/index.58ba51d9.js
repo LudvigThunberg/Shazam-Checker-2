@@ -463,6 +463,9 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 window.onload = function() {
     document.getElementById("search-button").addEventListener("click", searchShazamArtist);
+    document.getElementById("search-input").addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) searchShazamArtist();
+    });
     document.getElementById("modal-close").addEventListener("click", closeModal);
     document.getElementById("modal-background").addEventListener("click", closeModal);
 };
@@ -470,8 +473,8 @@ let defaultArtistImage = "https://openclipart.org/image/800px/7645";
 let defaultCoverImage = "https://media.istockphoto.com/vectors/vinyl-records-vector-id542290570?k=20&m=542290570&s=612x612&w=0&h=nKQYVVUXByWoMZ6YXH-thC8HzPTDiwfw-MODsmi6cTc=";
 function searchShazamArtist() {
     let container = document.getElementById("container");
-    let seachInput = document.getElementById("search-input");
-    let serachInputValue = seachInput.value;
+    let searchInput = document.getElementById("search-input");
+    let serachInputValue = searchInput.value;
     container.innerHTML = "";
     fetch("https://shazam-core.p.rapidapi.com/v1/artists/search?query=" + serachInputValue, {
         method: "GET",
@@ -486,6 +489,7 @@ function searchShazamArtist() {
     }).catch((err)=>{
         console.error(err);
     });
+    searchInput.value = null;
 }
 function createArtistHtml(result) {
     let container = document.getElementById("container");

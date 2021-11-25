@@ -5,6 +5,13 @@ window.onload = function () {
   document
     .getElementById("search-button")
     .addEventListener("click", searchShazamArtist);
+  document
+    .getElementById("search-input")
+    .addEventListener("keyup", function (event) {
+      if (event.keyCode === 13) {
+        searchShazamArtist();
+      }
+    });
   document.getElementById("modal-close").addEventListener("click", closeModal);
   document
     .getElementById("modal-background")
@@ -19,10 +26,11 @@ function searchShazamArtist() {
   let container: HTMLDivElement = document.getElementById(
     "container"
   ) as HTMLDivElement;
-  let seachInput: HTMLInputElement = document.getElementById(
+  let searchInput: HTMLInputElement = document.getElementById(
     "search-input"
   ) as HTMLInputElement;
-  let serachInputValue: string = seachInput.value;
+
+  let serachInputValue: string = searchInput.value;
 
   container.innerHTML = "";
 
@@ -46,6 +54,7 @@ function searchShazamArtist() {
     .catch((err) => {
       console.error(err);
     });
+  searchInput.value = null;
 }
 
 function createArtistHtml(result: IArtist[]) {
