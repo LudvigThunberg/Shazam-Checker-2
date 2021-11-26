@@ -485,6 +485,7 @@ function searchShazamArtist() {
     }).then((response)=>{
         return response.json();
     }).then((result)=>{
+        console.log(result);
         createArtistHtml(result);
     }).catch((err)=>{
         console.error(err);
@@ -493,7 +494,7 @@ function searchShazamArtist() {
 }
 function createArtistHtml(result) {
     let container = document.getElementById("container");
-    container.className = "container";
+    //container.className = "container";
     /* let mainContainer: HTMLDivElement = document.getElementById(
     "mainContainer"
   ) as HTMLDivElement; */ for(let i = 0; i < result.length; i++){
@@ -503,7 +504,7 @@ function createArtistHtml(result) {
         let artistImage = document.createElement("img");
         artistContainer.className = "artist-song-container";
         imageContainer.className = "image-container";
-        artistContainer.id = "artist-container";
+        //artistContainer.id = "artist-container";
         artistContainer.addEventListener("click", ()=>{
             searchTracks(result[i].id);
         });
@@ -520,7 +521,7 @@ function createArtistHtml(result) {
 function searchTracks(artistId) {
     let containerTwo = document.getElementById("container-two");
     containerTwo.innerHTML = "";
-    fetch("https://shazam-core.p.rapidapi.com/v1/artists/tracks?artist_id=" + artistId + "&limit=50", {
+    fetch("https://shazam-core.p.rapidapi.com/v1/artists/tracks?artist_id=" + artistId + "&limit=10", {
         method: "GET",
         headers: {
             "x-rapidapi-host": "shazam-core.p.rapidapi.com",
@@ -530,6 +531,7 @@ function searchTracks(artistId) {
         return response.json();
     }).then((result)=>{
         createSongHtml(result);
+        console.log(result);
     }).catch((err)=>{
         console.error(err);
     });
@@ -592,7 +594,6 @@ function closeModal() {
     let modalBackground = document.getElementById("modal-background");
     let modal = document.getElementById("modal");
     modalBackground.classList.remove("modal-background-class-visible");
-    console.log(modal.innerHTML);
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"ciiiV":[function(require,module,exports) {

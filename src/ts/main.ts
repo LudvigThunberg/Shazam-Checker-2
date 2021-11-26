@@ -49,6 +49,7 @@ function searchShazamArtist() {
       return response.json();
     })
     .then((result: IArtist[]) => {
+      console.log(result);
       createArtistHtml(result);
     })
     .catch((err) => {
@@ -61,7 +62,7 @@ function createArtistHtml(result: IArtist[]) {
   let container: HTMLDivElement = document.getElementById(
     "container"
   ) as HTMLDivElement;
-  container.className = "container";
+  //container.className = "container";
   /* let mainContainer: HTMLDivElement = document.getElementById(
     "mainContainer"
   ) as HTMLDivElement; */
@@ -74,7 +75,8 @@ function createArtistHtml(result: IArtist[]) {
 
     artistContainer.className = "artist-song-container";
     imageContainer.className = "image-container";
-    artistContainer.id = "artist-container";
+
+    //artistContainer.id = "artist-container";
 
     artistContainer.addEventListener("click", () => {
       searchTracks(result[i].id);
@@ -106,7 +108,7 @@ function searchTracks(artistId: string) {
   fetch(
     "https://shazam-core.p.rapidapi.com/v1/artists/tracks?artist_id=" +
       artistId +
-      "&limit=50",
+      "&limit=10",
     {
       method: "GET",
       headers: {
@@ -120,6 +122,7 @@ function searchTracks(artistId: string) {
     })
     .then((result: ISong[]) => {
       createSongHtml(result);
+      console.log(result);
     })
     .catch((err) => {
       console.error(err);
@@ -221,5 +224,4 @@ function closeModal() {
     "modal"
   ) as HTMLDivElement;
   modalBackground.classList.remove("modal-background-class-visible");
-  console.log(modal.innerHTML);
 }
