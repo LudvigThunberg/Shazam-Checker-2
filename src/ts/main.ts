@@ -61,18 +61,18 @@ function createArtistHtml(result: IArtist[]) {
   let container: HTMLDivElement = document.getElementById(
     "container"
   ) as HTMLDivElement;
-  let mainContainer: HTMLDivElement = document.getElementById(
+  container.className = "container";
+  /* let mainContainer: HTMLDivElement = document.getElementById(
     "mainContainer"
-  ) as HTMLDivElement;
+  ) as HTMLDivElement; */
 
   for (let i = 0; i < result.length; i++) {
     let artistContainer: HTMLDivElement = document.createElement("div");
-    let artistNameParagraph: HTMLParagraphElement = document.createElement(
-      "h2"
-    );
+    let artistNameParagraph: HTMLElement = document.createElement("h4");
     let imageContainer: HTMLDivElement = document.createElement("div");
     let artistImage: HTMLImageElement = document.createElement("img");
 
+    artistContainer.className = "artist-song-container";
     imageContainer.className = "image-container";
     artistContainer.id = "artist-container";
 
@@ -94,7 +94,6 @@ function createArtistHtml(result: IArtist[]) {
     artistContainer.appendChild(imageContainer);
     imageContainer.appendChild(artistImage);
   }
-  mainContainer.appendChild(container);
 }
 
 function searchTracks(artistId: string) {
@@ -107,7 +106,7 @@ function searchTracks(artistId: string) {
   fetch(
     "https://shazam-core.p.rapidapi.com/v1/artists/tracks?artist_id=" +
       artistId +
-      "&limit=10",
+      "&limit=50",
     {
       method: "GET",
       headers: {
@@ -135,14 +134,16 @@ function createSongHtml(result: ISong[]) {
     "mainContainer"
   ) as HTMLDivElement;
 
+  containerTwo.className = "container";
+
   for (let i = 0; i < result.length; i++) {
     let songContainer: HTMLDivElement = document.createElement("div");
-    let songTitle: HTMLParagraphElement = document.createElement("p");
+    let songTitle: HTMLElement = document.createElement("h4");
     let songImgContainer: HTMLDivElement = document.createElement("div");
     let coverArt: HTMLImageElement = document.createElement("img");
 
-    songImgContainer.className = "song-image-container";
-    songContainer.className = "song-container";
+    songContainer.className = "artist-song-container";
+    songImgContainer.className = "image-container";
 
     songContainer.addEventListener("click", () => {
       checkShazams(result[i].id);
@@ -162,7 +163,6 @@ function createSongHtml(result: ISong[]) {
     songContainer.appendChild(songImgContainer);
     containerTwo.appendChild(songContainer);
   }
-  mainContainer.appendChild(containerTwo);
 }
 
 function checkShazams(songId: string) {

@@ -1,14 +1,23 @@
+@use "mixins";
+@use "variables";
+
 body {
   position: relative;
+  margin: 0;
+  background-color: #800020;
   header {
+    height: 15vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: tomato;
+    background-color: #800020;
+    border-bottom: 2px solid black;
+    h3 {
+      color: white;
+    }
     .input-container {
-      height: 80px;
-      width: 40%;
+      width: 80%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -28,59 +37,77 @@ body {
         box-sizing: border-box;
       }
     }
-  }
-  #heading-container {
-    display: flex;
-    justify-content: space-evenly;
-    gap: 20%;
+    @include mixins.responsive(tablet) {
+      .input-container {
+        width: 60%;
+      }
+    }
+    @include mixins.responsive(desktop) {
+      .input-container {
+        width: 40%;
+      }
+    }
   }
   #mainContainer {
     display: flex;
     justify-content: flex-start;
-    #container {
-      order: 1;
-      width: 49vw;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 5px;
-      overflow: scroll;
-      background-color: whitesmoke;
-      #artist-container {
-        width: 80%;
+    flex-direction: column;
+    gap: 1vh;
+    .container-container {
+      .heading {
+        display: none;
+        margin: 0;
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        .image-container {
-          width: 100%;
-          img {
+        background-color: variables.$background-color;
+        height: 50px;
+      }
+      .container {
+        order: 1;
+        width: 100vw;
+        height: 42vh;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 5px;
+        overflow: scroll;
+        background-color: variables.$background-color;
+        h4 {
+          margin: 10px;
+        }
+        .artist-song-container {
+          width: 80%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          background-color: variables.$background-color;
+          .image-container {
             width: 100%;
+            img {
+              width: 100%;
+              border: 1px solid black;
+            }
           }
         }
       }
     }
-    #container-two {
-      order: 2;
-      width: 49vw;
-      height: 100vh;
-      display: flex;
+
+    @include mixins.responsive(tablet) {
+      flex-direction: row;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 5px;
-      overflow: scroll;
-      background-color: whitesmoke;
-      .song-container {
-        width: 80%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        .song-image-container {
-          width: 100%;
-          img {
-            width: 100%;
-          }
+      .container-container {
+        .heading {
+          display: block;
+          margin: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: variables.$background-color;
+        }
+        .container {
+          width: 49vw;
+          height: 100vh;
         }
       }
     }
@@ -102,18 +129,24 @@ body {
 
     .modal-class {
       background-color: whitesmoke;
-      width: 30%;
+      width: 80%;
       height: 20%;
       border-radius: 5px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-evenly;
+      border: 3px solid black;
+      p {
+        font-size: 1.2rem;
+      }
     }
+
     #modal-close {
       cursor: pointer;
     }
   }
+
   .modal-background-class-visible {
     visibility: visible;
     opacity: 1;

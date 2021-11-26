@@ -493,12 +493,15 @@ function searchShazamArtist() {
 }
 function createArtistHtml(result) {
     let container = document.getElementById("container");
-    let mainContainer = document.getElementById("mainContainer");
-    for(let i = 0; i < result.length; i++){
+    container.className = "container";
+    /* let mainContainer: HTMLDivElement = document.getElementById(
+    "mainContainer"
+  ) as HTMLDivElement; */ for(let i = 0; i < result.length; i++){
         let artistContainer = document.createElement("div");
-        let artistNameParagraph = document.createElement("h2");
+        let artistNameParagraph = document.createElement("h4");
         let imageContainer = document.createElement("div");
         let artistImage = document.createElement("img");
+        artistContainer.className = "artist-song-container";
         imageContainer.className = "image-container";
         artistContainer.id = "artist-container";
         artistContainer.addEventListener("click", ()=>{
@@ -513,12 +516,11 @@ function createArtistHtml(result) {
         artistContainer.appendChild(imageContainer);
         imageContainer.appendChild(artistImage);
     }
-    mainContainer.appendChild(container);
 }
 function searchTracks(artistId) {
     let containerTwo = document.getElementById("container-two");
     containerTwo.innerHTML = "";
-    fetch("https://shazam-core.p.rapidapi.com/v1/artists/tracks?artist_id=" + artistId + "&limit=10", {
+    fetch("https://shazam-core.p.rapidapi.com/v1/artists/tracks?artist_id=" + artistId + "&limit=50", {
         method: "GET",
         headers: {
             "x-rapidapi-host": "shazam-core.p.rapidapi.com",
@@ -535,13 +537,14 @@ function searchTracks(artistId) {
 function createSongHtml(result) {
     let containerTwo = document.getElementById("container-two");
     let mainContainer = document.getElementById("mainContainer");
+    containerTwo.className = "container";
     for(let i = 0; i < result.length; i++){
         let songContainer = document.createElement("div");
-        let songTitle = document.createElement("p");
+        let songTitle = document.createElement("h4");
         let songImgContainer = document.createElement("div");
         let coverArt = document.createElement("img");
-        songImgContainer.className = "song-image-container";
-        songContainer.className = "song-container";
+        songContainer.className = "artist-song-container";
+        songImgContainer.className = "image-container";
         songContainer.addEventListener("click", ()=>{
             checkShazams(result[i].id);
         });
@@ -554,7 +557,6 @@ function createSongHtml(result) {
         songContainer.appendChild(songImgContainer);
         containerTwo.appendChild(songContainer);
     }
-    mainContainer.appendChild(containerTwo);
 }
 function checkShazams(songId) {
     fetch("https://shazam-core.p.rapidapi.com/v1/tracks/total-shazams?track_id=" + songId + "", {

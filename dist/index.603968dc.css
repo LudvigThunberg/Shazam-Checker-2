@@ -1,16 +1,22 @@
 body {
   position: relative;
+  margin: 0;
+  background-color: #800020;
 }
 body header {
+  height: 15vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: tomato;
+  background-color: #800020;
+  border-bottom: 2px solid black;
+}
+body header h3 {
+  color: white;
 }
 body header .input-container {
-  height: 80px;
-  width: 40%;
+  width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,61 +36,76 @@ body header .input-container #search-input {
   border-radius: 5px;
   box-sizing: border-box;
 }
-body #heading-container {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 20%;
+@media only screen and (min-width: 720px) {
+  body header .input-container {
+    width: 60%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  body header .input-container {
+    width: 40%;
+  }
 }
 body #mainContainer {
   display: flex;
   justify-content: flex-start;
+  flex-direction: column;
+  gap: 1vh;
 }
-body #mainContainer #container {
+body #mainContainer .container-container .heading {
+  display: none;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #acacac;
+  height: 50px;
+}
+body #mainContainer .container-container .container {
   order: 1;
-  width: 49vw;
-  height: 100vh;
+  width: 100vw;
+  height: 42vh;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 5px;
   overflow: scroll;
-  background-color: whitesmoke;
+  background-color: #acacac;
 }
-body #mainContainer #container #artist-container {
+body #mainContainer .container-container .container h4 {
+  margin: 10px;
+}
+body #mainContainer .container-container .container .artist-song-container {
   width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #acacac;
 }
-body #mainContainer #container #artist-container .image-container {
+body #mainContainer .container-container .container .artist-song-container .image-container {
   width: 100%;
 }
-body #mainContainer #container #artist-container .image-container img {
+body #mainContainer .container-container .container .artist-song-container .image-container img {
   width: 100%;
+  border: 1px solid black;
 }
-body #mainContainer #container-two {
-  order: 2;
-  width: 49vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 5px;
-  overflow: scroll;
-  background-color: whitesmoke;
-}
-body #mainContainer #container-two .song-container {
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-body #mainContainer #container-two .song-container .song-image-container {
-  width: 100%;
-}
-body #mainContainer #container-two .song-container .song-image-container img {
-  width: 100%;
+@media only screen and (min-width: 720px) {
+  body #mainContainer {
+    flex-direction: row;
+    justify-content: center;
+  }
+  body #mainContainer .container-container .heading {
+    display: block;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #acacac;
+  }
+  body #mainContainer .container-container .container {
+    width: 49vw;
+    height: 100vh;
+  }
 }
 body .modal-background-class {
   position: fixed;
@@ -102,13 +123,17 @@ body .modal-background-class {
 }
 body .modal-background-class .modal-class {
   background-color: whitesmoke;
-  width: 30%;
+  width: 80%;
   height: 20%;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  border: 3px solid black;
+}
+body .modal-background-class .modal-class p {
+  font-size: 1.2rem;
 }
 body .modal-background-class #modal-close {
   cursor: pointer;
